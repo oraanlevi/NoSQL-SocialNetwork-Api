@@ -17,8 +17,9 @@ const formatDate = function (timestamp) {
         'December'
     ];
 
-    return months[date.getMonth()] + '' + DataTransfer.getDate
-        () + ',' + date.getFullYear();
+    return (
+        months[date.getMonth()] + '' + date.getDate() + ',' + date.getFullYear()
+    );
 
 };
 

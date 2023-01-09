@@ -1,21 +1,21 @@
 const { Schema, model } = require('mongoose');
+const reactionSchema = require('../utils/formatDate');
 const formatDate = require('../utils/formatDate');
-const reactionSchema = require('./Reaction');
 
 
 
 const thoughtSchema = new Schema(
     {
-        thoguhtTest: {
+        thoughtText: {
             type: String,
             required: true,
-            minlengths: 1,
-            maxlengths: 280
+            minlength: 1,
+            maxlength: 280
         },
         createdAt: {
             type: Date,
             default: Date.now,
-            get: timestamp => formatDate(timestamp),
+            get: (timestamp) => formatDate(timestamp),
 
         },
         username: {
@@ -31,16 +31,14 @@ const thoughtSchema = new Schema(
             getters: true
         },
 
-    }
+    });
 
-);
-
-userSchema.virtual('reactionCount').get(function() {
-    return this.reaction.length;
+thoughtSchema.virtual('reactionCount').get(function () {
+    return this.reactions.length;
 
 });
 
 
-const User = model('thought', thoughtSchema);
+const Thought = model('thought', thoughtSchema);
 
 module.exports = Thought;
